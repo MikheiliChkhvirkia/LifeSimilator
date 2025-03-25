@@ -22,7 +22,7 @@ namespace LifeSimilator
                 Console.Clear();
                 ShowCharacter(character);
 
-                Console.WriteLine("JUST Survive if you can!!!");
+                Console.WriteLine("JUST Survive if you can!!!!");
 
                 int eventCount = 0;
                 while (character.IsAlive)
