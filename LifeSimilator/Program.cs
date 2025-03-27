@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.Design;
-using LifeSimilator.Enums;
+﻿using LifeSimilator.Enums;
 
 namespace LifeSimilator
- {
+{
     static class Program
     {
         static Random random = new Random();
@@ -35,6 +34,8 @@ namespace LifeSimilator
                     Console.WriteLine($" Health: {character.Health}, Money: {character.Money}");
                     CheckSurvival(character);
 
+                    character.Health--;
+
                     Thread.Sleep(1000);
                 }
 
@@ -50,7 +51,7 @@ namespace LifeSimilator
 
         private static void CheckSurvival(Character character)
         {
-            if(character.Health <= 0)
+            if (character.Health <= 0)
             {
                 Console.WriteLine("You are Died/Wasted");
                 character.IsAlive = false;
@@ -59,7 +60,7 @@ namespace LifeSimilator
 
         private static void GenerateRandomEvent(Character character)
         {
-            EventsEnum eventType = (EventsEnum)random.Next(1, 4);
+            EventsEnum eventType = (EventsEnum)random.Next(1, 12);
             switch (eventType)
             {
                 case EventsEnum.PayDay:
@@ -82,7 +83,7 @@ namespace LifeSimilator
                     break;
                 case EventsEnum.ChangeCareer:
                     ChangeCareer(character);
-                    break;  
+                    break;
                 case EventsEnum.PayRent:
                     PayRent(character);
                     break;
@@ -94,7 +95,8 @@ namespace LifeSimilator
                 case EventsEnum.BrokeCar:
                     BrokeCar(character);
                     break;
-                default:NothingHappened(character);
+                default:
+                    NothingHappened(character);
                     break;
             }
         }
@@ -126,7 +128,7 @@ namespace LifeSimilator
             if (Console.ReadLine() == "y" && character.Money >= 20)
             {
                 character.Money -= 20;
-                if (random.Next(1, 101) <= 50) 
+                if (random.Next(1, 101) <= 50)
                 {
                     int profite = random.Next(50, 70);
                     character.Money += profite;
@@ -173,26 +175,29 @@ namespace LifeSimilator
             if (choice == "1")
             {
                 int cost = random.Next(20, 30);
-                if (character.Money > cost) 
-                { 
-                  
+                if (character.Money > cost)
+                {
+
                     character.Money -= cost;
                     Console.WriteLine($"u charged {cost} for hospital but ur healthly ");
-                }else 
-                 {
+                }
+                else
+                {
                     Console.WriteLine("choose other option u dont have enough money");
-                    GotSick(character); 
-                 }
+                    GotSick(character);
+                }
 
 
-            } else if (choice == "2") {
-
+            }
+            else if (choice == "2")
+            {
                 int cost = random.Next(10, 15);
-                if (character.Money >= cost )
+                if (character.Money >= cost)
                 {
                     int damage = random.Next(5, 10);
                     character.Money -= cost;
                     character.Health -= damage;
+
                     Console.WriteLine($"-{cost} to money");
                     Console.WriteLine($"u was very ill and meds dont fully heal u,therefore u lost{damage}");
                 }
@@ -201,13 +206,17 @@ namespace LifeSimilator
                     Console.WriteLine("choose other option u dont have enough money");
                     GotSick(character);
                 }
-            } else if (choice == "3") {
+            }
+            else if (choice == "3")
+            {
                 int damage = random.Next(10, 15);
-                character.Health -=damage;
+                character.Health -= damage;
 
                 Console.WriteLine("u take rest but that dont heal u, take care of ur life");
             }
-            else { Console.WriteLine("u make mistake");
+            else
+            {
+                Console.WriteLine("u make mistake");
                 int damage = random.Next(20, 30);
                 int moneylost = random.Next(20, 30);
                 character.Money -= moneylost;
@@ -215,7 +224,7 @@ namespace LifeSimilator
                 Console.WriteLine($"u lost{damage}health and {moneylost}money.make correct choice next time by using proper keys");
             }
         }
-
+        // ChangeCareer-ში გამოიტანე ის პროფესიები რომელშიც შეუძლია შეცვლა ( ანუ თუ არის ექიმი არ უნდა შეეძლოს ისევ ექიმის არჩევა )
         private static void ChangeCareer(Character character)
         {
             Console.WriteLine("choose new career: 1) programmer-$20, 2) doctor-$15, 3) TaxiDriver -$10 , 4) WoodCutter-$5 5) unempoyed-$0");
@@ -287,7 +296,8 @@ namespace LifeSimilator
 
             int chance = random.Next(1, 101);
 
-            if (choice == "1") {
+            if (choice == "1")
+            {
 
                 if (chance <= 50)
                 {
@@ -295,7 +305,9 @@ namespace LifeSimilator
                     Console.WriteLine($"u fight like ilia topuria, so u beat him up and take his money {moneytaked} ");
                     character.Money += moneytaked;
                 }
-                else { int damage = random.Next(15, 25);
+                else
+                {
+                    int damage = random.Next(15, 25);
                     int moneylost = random.Next(40, 50);
                     character.Health -= damage;
                     character.Money -= moneylost;
@@ -304,11 +316,12 @@ namespace LifeSimilator
                 }
             }
             else if (choice == "2")
-            { if (chance <= 40)
+            {
+                if (chance <= 40)
                 {
                     int moneylost = random.Next(10, 20);
                     character.Money -= moneylost;
-                    Console.WriteLine($"ur great talker and because of ur soft skill u lost only{moneylost}");
+                    Console.WriteLine($"ur great talker and because of ur soft skill u lost only {moneylost}");
                 }
                 else
                 {
@@ -321,7 +334,7 @@ namespace LifeSimilator
             {
                 if (chance <= 60)
                 {
-                    Console.WriteLine("u succesfully ran away. ur lil tired but u will be fine");
+                    Console.WriteLine("u successfully ran away. ur lil tired but u will be fine");
 
                 }
                 else
@@ -330,7 +343,7 @@ namespace LifeSimilator
                     int moneylost = random.Next(30, 50);
                     character.Health -= damage;
                     character.Money -= moneylost;
-                    Console.WriteLine($"u tired and they cought u. they beat up u for running{damage} and take ur money{moneylost}");
+                    Console.WriteLine($"u tired and they cought u. they beat up u for running {damage} and take ur money {moneylost}");
 
                 }
             }
@@ -343,34 +356,34 @@ namespace LifeSimilator
             }
         }
 
-                    private static void CreateCharacter(Character character)
-                    {
-                        Console.Write("Insert character FirstName: ");
-                        character.FirstName = Console.ReadLine();
-                        Console.WriteLine();
+        private static void CreateCharacter(Character character)
+        {
+            Console.Write("Insert character FirstName: ");
+            character.FirstName = Console.ReadLine();
+            Console.WriteLine();
 
-                        Console.Write("Insert character LastName: ");
-                        character.LastName = Console.ReadLine();
-                        Console.WriteLine();
+            Console.Write("Insert character LastName: ");
+            character.LastName = Console.ReadLine();
+            Console.WriteLine();
 
-                        Console.Write("Insert character Age: ");
-                        character.Age = Convert.ToInt32(Console.ReadLine());
-                        Console.WriteLine();
+            Console.Write("Insert character Age: ");
+            character.Age = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
 
-                        Console.WriteLine("Insert character Nationality");
-                        Console.WriteLine();
-                        foreach (var nationalityVal in Enum.GetValues<NationalityEnum>())
-                        {
-                            Console.WriteLine($"Option {(int)nationalityVal}: Value {nationalityVal}");
-                        }
-                        Console.WriteLine();
-                        Console.Write("Answer Nationality:");
-                        character.Nationality = (NationalityEnum)Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Insert character Nationality");
+            Console.WriteLine();
+            foreach (var nationalityVal in Enum.GetValues<NationalityEnum>())
+            {
+                Console.WriteLine($"Option {(int)nationalityVal}: Value {nationalityVal}");
+            }
+            Console.WriteLine();
+            Console.Write("Answer Nationality:");
+            character.Nationality = (NationalityEnum)Convert.ToInt32(Console.ReadLine());
 
-                        character.Job = JobEnum.Unemployed;
-                        character.Health = 100;
-                        character.Money = 200;
-                    }
+            character.Job = JobEnum.Unemployed;
+            character.Health = 100;
+            character.Money = 200;
+        }
 
         private static void ShowCharacter(Character character)
         {

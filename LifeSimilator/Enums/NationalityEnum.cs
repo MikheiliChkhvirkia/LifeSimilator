@@ -2,7 +2,7 @@
 {
     internal enum NationalityEnum
     {
-        Georgian,
+        Georgian = 1,
         Russian,
         Ukrainian,
         Arab
