@@ -10,7 +10,11 @@ namespace LifeSimilator
         {
             StartGame();
         }
-
+        //ToDo:
+        // 1) "1" ან "y"/"Y" ნაცვლად შემოიტანე enum.
+        // 2) Character ისე გააკეთე რომ ყველა მეთოდში არ გადავაწვდიდეთ თავიდან როდესაც ისედაც 1 character-ზე ვმუშაობთ.
+        // 3) გამოიდგას interface/abstract კლასები რომელიც იქნება ლოგიკურად აწყობილი (მაგ: IJob, IRobbed ასე შემდეგ)
+        // 4) Character კლასის ენკაპსულაცია მოხდეს. ანუ ამ ობიექტის მონაცემების შეცვლა უნდა შემეძლოს მხოლოდ Character-ის გამოდგმული მეთოდებიდან ან Property-დან
         private static void StartGame()
         {
             while (startGame)
@@ -149,7 +153,7 @@ namespace LifeSimilator
         private static void BoughtCar(Character character)
         {
 
-            Console.WriteLine($"this is u current transport{character.Car}");
+            Console.WriteLine($"this is u current transport {character.Car}");
             Console.WriteLine("u want to change ur transport?(y/n)");
             
             if (Console.ReadLine() == "y")
@@ -182,7 +186,7 @@ namespace LifeSimilator
 
         private static void GotSick(Character character)
         {
-            Console.WriteLine("You got sick and choose what u gonna do?");
+            Console.WriteLine(@"You got sick and choose what u gonna do?");
             Console.WriteLine("go to hospital-1");
             Console.WriteLine("pay for meds-2");
             Console.WriteLine("take rest-3");
@@ -239,7 +243,7 @@ namespace LifeSimilator
                 int moneylost = random.Next(20, 30);
                 character.Money -= moneylost;
                 character.Health -= damage;
-                Console.WriteLine($"u lost{damage}health and {moneylost}money.make correct choice next time by using proper keys");
+                Console.WriteLine($"u lost {damage} health and {moneylost}money.make correct choice next time by using proper keys");
             }
         }
         // ChangeCareer-ში გამოიტანე ის პროფესიები რომელშიც შეუძლია შეცვლა ( ანუ თუ არის ექიმი არ უნდა შეეძლოს ისევ ექიმის არჩევა )
