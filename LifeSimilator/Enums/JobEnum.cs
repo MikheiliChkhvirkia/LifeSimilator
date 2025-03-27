@@ -5,7 +5,8 @@
         Unemployed = 0,
         WoodCutter = 5,
         TaxiDriver = 10,
-        Programmer = 15,
-        Doctor = 20
+        Doctor = 15,
+        Programmer = 20
+        
     }
 }
