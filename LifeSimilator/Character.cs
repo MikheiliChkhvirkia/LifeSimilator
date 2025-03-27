@@ -7,7 +7,7 @@ namespace LifeSimilator
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
-        public CarsEnum Car { get; set; }
+        public IList<CarsEnum> Car { get; set; }
         public NationalityEnum Nationality { get; set; }
         public IList<Character> Family { get; set; }
     }

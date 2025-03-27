@@ -145,19 +145,37 @@ namespace LifeSimilator
             }
 
         }
+        
+        private static void BoughtCar(Character character)
+        {
+
+            Console.WriteLine($"this is u current transport{character.Car}");
+            Console.WriteLine("u want to change ur transport?(y/n)");
+            
+            if (Console.ReadLine() == "y")
+        }
 
         private static void BrokeCar(Character character)
         {
-            int repairCost = random.Next(5, 20);
-            if (character.Money >= repairCost)
+            if (character.Car != CarsEnum.NoCar)
             {
-                character.Money -= repairCost;
-                Console.WriteLine($"ur car broke down, repair cost: ${repairCost}");
+
+
+                int repairCost = random.Next(5, 20);
+                if (character.Money >= repairCost)
+                {
+                    character.Money -= repairCost;
+                    Console.WriteLine($"ur car broke down, repair cost: ${repairCost}");
+                }
+                else
+                {
+                    character.Health -= 10;
+                    Console.WriteLine($"couldnt afford repairs. u lost 10 ");
+                }
             }
             else
             {
-                character.Health -= 10;
-                Console.WriteLine($"couldnt afford repairs. u lost 10 ");
+                NothingHappened(character);
             }
 
         }
