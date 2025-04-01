@@ -1,26 +1,41 @@
 ﻿using LifeSimilator.Enums;
+using LifeSimilator.Events.Generic;
+using LifeSimilator.Models.CarModels;
+using LifeSimilator.Models.JobModels;
 
 namespace LifeSimilator
 {
     static class Program
     {
-        private static Character Character;
-        private static Random random = new Random();
+        private static Character character;
         private static bool startGame = true;
+
+        private static Job _job;
+        private static Car _car;
+
         public static void Main()
         {
+            SetupGame();
             StartGame();
         }
+
         //ToDo:
         // 1) "1" ან "y"/"Y" ნაცვლად შემოიტანე enum.
         //.
         // 3) გამოიდგას interface/abstract კლასები რომელიც იქნება ლოგიკურად აწყობილი (მაგ: IJob, IRobbed ასე შემდეგ)
         // 
+
+        private static void SetupGame()
+        {
+            _job = new Job();
+            _car = new Car();
+        }
+
         private static void StartGame()
         {
             while (startGame)
             {
-                 character = new Character();
+                character = new Character();
 
                 CreateCharacter();
 
@@ -39,8 +54,8 @@ namespace LifeSimilator
                     Console.WriteLine($" Health: {character.Health}, Money: {character.Money}");
                     CheckSurvival();
 
-                    
-                    character.TakeDamage(eventCount);
+
+                    character.TakeDamage(1);
                     Thread.Sleep(1000);
                 }
 
@@ -56,89 +71,80 @@ namespace LifeSimilator
 
         private static void CheckSurvival()
         {
-            if (character.Health <= 0)
+            if (!character.IsAlive)
             {
                 Console.WriteLine("You are Died/Wasted");
-                character.IsAlive = false;
             }
         }
 
         private static void GenerateRandomEvent()
         {
-
-            EventsEnum randomEvent = GetRandomEvent();
-
-            switch (eventType)
+            switch (GenericEvents.GetRandomEvent())
             {
                 case EventsEnum.PayDay:
-                    PayDay();
+                    _job.PayDay(character);
                     break;
-                case EventsEnum.GotSick:
-                    GotSick();
-                    break;
-                case EventsEnum.NothingHappened:
-                    NothingHappened();
-                    break;
-                case EventsEnum.GotRobbed:
-                    GetRobbed();
-                    break;
-                case EventsEnum.FoundTreasure:
-                    FoundTreasure();
-                    break;
-                case EventsEnum.FoundDateGirl:
-                    DateGirl();
-                    break;
+                //case EventsEnum.GotSick:
+                //    GotSick();
+                //    break;
+                //case EventsEnum.NothingHappened:
+                //    NothingHappened();
+                //    break;
+                //case EventsEnum.GotRobbed:
+                //    GetRobbed();
+                //    break;
+                //case EventsEnum.FoundTreasure:
+                //    FoundTreasure();
+                //    break;
+                //case EventsEnum.FoundDateGirl:
+                //    DateGirl();
+                //    break;
                 case EventsEnum.ChangeCareer:
-                    ChangeCareer();
+                    _job.ChangeCareer(character);
                     break;
-                case EventsEnum.PayRent:
-                    PayRent();
-                    break;
-                case EventsEnum.Invested:
-                    Invested();
-                    break;
+                //case EventsEnum.PayRent:
+                //    PayRent();
+                //    break;
+                //case EventsEnum.Invested:
+                //    Invested();
+                //    break;
                 case EventsEnum.BoughtCar:
-                    BoughtCar();
+                    _car.BoughtCar(character);
                     break;
                 case EventsEnum.BrokeCar:
-                    BrokeCar();
+                    _car.BrokeCar(character);
                     break;
-                case EventsEnum.AdoptPet:
-                    AdoptPet();
-                    break;
-                case EventsEnum.FoundNewFriend:
-                    FoundNewFriend();
-                    break;
-                case EventsEnum.HadAccident:
-                    HadAccident();
-                    break;
-                case EventsEnum.HouseFire:
-                    HouseFire();
-                    break;
+                //case EventsEnum.AdoptPet:
+                //    AdoptPet();
+                //    break;
+                //case EventsEnum.FoundNewFriend:
+                //    FoundNewFriend();
+                //    break;
+                //case EventsEnum.HadAccident:
+                //    HadAccident();
+                //    break;
+                //case EventsEnum.HouseFire:
+                //    HouseFire();
+                //    break;
                 case EventsEnum.LearnedNewSkill:
-                    LearnedNewSkill();
+                    _job.LearnedNewSkill(character);
                     break;
-                case EventsEnum.NaturalDisaster:
-                    NaturalDisaster();
-                    break;
-                case EventsEnum.WentOnVacation:
-                    WentOnVacation();
-                    break;
-                case EventsEnum.LostWallet:
-                    LostWallet();
-                    break;
-                case EventsEnum.WonLottery:
-                    WonLottery();
-                    break;
+                //case EventsEnum.NaturalDisaster:
+                //    NaturalDisaster();
+                //    break;
+                //case EventsEnum.WentOnVacation:
+                //    WentOnVacation();
+                //    break;
+                //case EventsEnum.LostWallet:
+                //    LostWallet();
+                //    break;
+                //case EventsEnum.WonLottery:
+                //    WonLottery();
+                //    break;
                 default:
-                    NothingHappened();
+                    GenericEvents.NothingHappened();
                     break;
             }
-        }
-
-        private static void NothingHappened()
-        {
-            Console.WriteLine("Nothing happened!");
         }
 
         private static void CreateCharacter()
@@ -179,7 +185,7 @@ namespace LifeSimilator
             Console.WriteLine($"Health      : {character.Health}");
             Console.WriteLine($"Money       : {character.Money}");
             Console.WriteLine($"Job         : {character.Job}");
-            Console.WriteLine($"Car         : {Character.Car}");
+            //Console.WriteLine($"Car         : {character.Car}");
             Console.WriteLine("==============================");
         }
     }

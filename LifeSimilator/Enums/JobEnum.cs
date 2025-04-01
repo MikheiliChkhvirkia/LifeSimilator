@@ -1,6 +1,6 @@
 ﻿namespace LifeSimilator.Enums
 {
-    internal enum JobEnum
+    public enum JobEnum
     {
         Unemployed = 0,
         WoodCutter = 5,

@@ -1,15 +1,17 @@
 ﻿using LifeSimilator.Enums;
+using LifeSimilator.Interfaces;
+using LifeSimilator.Models.CarModels;
 
 namespace LifeSimilator
 {
-    internal class Character : CharacterBase, ICarOwner, IJob
+    public class Character : CharacterBase, IJob
     {
         private string firstName;
         private string lastName;
         private int age;
         private NationalityEnum nationality;
-        private readonly List<CarsEnum> cars = new List<CarsEnum>();
-        private readonly List<Character> family = new List<Character>();
+        private readonly List<CarsEnum> cars = [];
+        private readonly List<Character> family = [];
         //public allowing on private info for using 
         public string FirstName
         {
@@ -59,12 +61,22 @@ namespace LifeSimilator
             if (family.Contains(member))
                 family.Remove(member);
         }
-        
-    }
-    internal abstract class CharacterBase
-    {
 
-        private bool IsAlive;
+        public void ChangeJob(JobEnum newJob)
+        {
+            if (Job != newJob)
+            {
+                Job = newJob;
+                Console.WriteLine($"Job changed to: {Job}");
+            }
+            else
+            {
+                Console.WriteLine("You already have that job!");
+            }
+        }
+    }
+    public abstract class CharacterBase : CarOwned
+    {
         private int health;
         private decimal money;
         private JobEnum job;
@@ -107,79 +119,5 @@ namespace LifeSimilator
     }
 }
 
-public interface ICarOwner
-{
-    // Car system
-    private List<CarsEnum> ownedCars = new();
-    public IReadOnlyList<CarsEnum> OwnedCars => ownedCars.AsReadOnly();
 
-    public CarsEnum CurrentCar { get; private set; } = CarsEnum.NoCar;
 
-    public void BuyCar(CarsEnum car)
-    {
-        if (!ownedCars.Contains(car))
-        {
-            ownedCars.Add(car);
-            CurrentCar = car;
-            Console.WriteLine($" You bought a {car} and it's now your active car.");
-        }
-        else
-        {
-            Console.WriteLine("You already own this car.");
-        }
-    }
-
-    public void SetActiveCar(CarsEnum car)
-    {
-        if (ownedCars.Contains(car))
-        {
-            CurrentCar = car;
-            Console.WriteLine($" {car} is now your active car.");
-        }
-        else
-        {
-            Console.WriteLine(" You don’t own this car yet.");
-        }
-    }
-    public void RemoveCar(CarsEnum car)
-    {
-        if (cars.Contains(car))
-            cars.Remove(car);
-    }
-
-    public void ShowCars()
-    {
-        Console.WriteLine(" Your Garage:");
-        foreach (var car in OwnedCars)
-        {
-            Console.WriteLine($" {car}");
-        }
-
-        Console.WriteLine($" Active Car: {CurrentCar}");
-    }
-}
-
-public interface IJob
-{
-    private JobEnum job = JobEnum.Unemployed;
-
-    public JobEnum Job => job;
-
-    public decimal GetSalary()
-    {
-        return (decimal)job;
-    }
-
-    public void ChangeJob(JobEnum newJob)
-    {
-        if (job != newJob)
-        {
-            job = newJob;
-            Console.WriteLine($"Job changed to: {job}");
-        }
-        else
-        {
-            Console.WriteLine("You already have that job!");
-        }
-    }
-}

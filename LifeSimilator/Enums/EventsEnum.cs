@@ -1,6 +1,6 @@
 ﻿namespace LifeSimilator.Enums
 {
-    internal enum EventsEnum
+    public enum EventsEnum
     {
         PayDay = 1,
         GotSick,

@@ -1,6 +1,6 @@
 ﻿namespace LifeSimilator.Enums
 {
-    internal enum NationalityEnum
+    public enum NationalityEnum
     {
         Georgian = 1,
         Russian,

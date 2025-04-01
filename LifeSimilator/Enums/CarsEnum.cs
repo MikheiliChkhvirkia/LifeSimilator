@@ -1,10 +1,24 @@
 ﻿namespace LifeSimilator.Enums
 {
-    internal enum CarsEnum
+    public enum CarsEnum
     {
-        NoCar = 0,
-        Toyota = 10,
-        Mercedes = 15,
-        Porsche = 20,
+        NoCar,
+        Toyota,
+        Mercedes ,
+        Porsche ,
+    }
+
+    public class CarMetaData
+    {
+        public CarsEnum Type { get; set; }
+        public int Price { get; set; }
+        public string DisplayName { get; set; }
+
+        public CarMetaData(CarsEnum type, int price, string displayName)
+        {
+            Type = type;
+            Price = price;
+            DisplayName = displayName;
+        }
     }
 }
