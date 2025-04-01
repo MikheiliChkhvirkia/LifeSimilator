@@ -13,5 +13,15 @@
         Invested, 
         BoughtCar,
         BrokeCar,
+        WonLottery,
+        HouseFire,
+        AdoptPet,
+        NaturalDisaster,
+        FoundNewFriend,
+        LostWallet,
+        LearnedNewSkill,
+        WentOnVacation,
+        HadAccident,
+
     }
 }
