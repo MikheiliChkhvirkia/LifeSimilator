@@ -55,11 +55,22 @@ namespace LifeSimilator.Services
                     EventCount = int.Parse(lines[7]),
                     SavedAt = DateTime.Parse(lines[8])
                 };
+
+                // ToDo: გამოიტანე მთელი ისტორია რაც არის ან ბოლო 10 მაინც ( Paging / Pagination )
+                // 0 - 1
+                // 1 - 2
+                // ...
+                // 9 - 10
+
+                // ToDo: 1,2,3,4 რომ არ იყოს გაწერილი ხელით შექმენი ზოგადი ენამი რომელიც მაგას გამოიყენებს
+                // ანუ გავაგზავნით სადამდე უნდა ავიდეს და რეები უნდა დაიწეროს ყოველი ნუმრის გვერდით.
+                // შესაბამისად y/n-შეც იგივე
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine($" Failed to load save: {ex.Message}");
-                return null;
+                throw;
             }
         }
 
@@ -85,6 +96,7 @@ namespace LifeSimilator.Services
                 return 0;
 
             var lines = File.ReadAllLines(HighScorePath);
+
             return int.TryParse(lines[2], out int score) ? score : 0;
         }
     }

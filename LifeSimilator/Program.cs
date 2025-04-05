@@ -32,6 +32,49 @@ namespace LifeSimilator
         private static void StartGame()
         {
             character = new Character();
+
+            LoadHistory();
+
+            while (startGame)
+            {
+
+                CreateCharacter();
+
+                Console.Clear();
+                ShowCharacter();
+
+                Console.WriteLine("JUST Survive if you can!!!!");
+
+                int eventCount = 0;
+                while (character.IsAlive)
+                {
+                    eventCount++;
+                    Console.WriteLine($"\n Event {eventCount}");
+                    GenerateRandomEvent();
+
+                    Console.WriteLine($" Health: {character.Health}, Money: {character.Money}");
+                    CheckSurvival();
+
+
+                    character.TakeDamage(1);
+                    Thread.Sleep(1000);
+                }
+
+                Console.WriteLine($"\n {character.FirstName} died after {eventCount} events.");
+                SaveSystem.SaveGame(character, eventCount);
+
+
+
+                Console.WriteLine($"\n Do you wish to start over.[y/n]");
+
+                if (Console.ReadLine() != "y")
+                    startGame = false;
+
+            }
+        }
+
+        private static void LoadHistory()
+        {
             Console.WriteLine(" Do you want to load your last save? (y/n)");
             if (Console.ReadLine()?.ToLower() == "y")
             {
@@ -63,44 +106,9 @@ namespace LifeSimilator
                     Console.WriteLine(" Failed to load save. Starting new game.");
                 }
             }
-
-            while (startGame)
-            {
-
-                CreateCharacter();
-
-                Console.Clear();
-                ShowCharacter();
-
-                Console.WriteLine("JUST Survive if you can!!!!");
-
-                int eventCount = 0;
-                while (character.IsAlive)
-                {
-                    eventCount++;
-                    Console.WriteLine($"\n Event {eventCount}");
-                    GenerateRandomEvent();
-
-                    Console.WriteLine($" Health: {character.Health}, Money: {character.Money}");
-                    CheckSurvival();
-
-
-                    character.TakeDamage(1);
-                    Thread.Sleep(1000);
-                }
-
-                Console.WriteLine($"\n {character.FirstName} died after {eventCount} events.");
-                SaveSystem.SaveGame(character, eventCount); 
-
-
-
-                Console.WriteLine($"\n Do you wish to start over.[y/n]");
-
-                if (Console.ReadLine() != "y")
-                    startGame = false;
-
-            }
         }
+
+
 
         private static void CheckSurvival()
         {
@@ -120,9 +128,6 @@ namespace LifeSimilator
                 case EventsEnum.GotSick:
                     LifeEvents.GotSick(character);
                     break;
-                //case EventsEnum.NothingHappened:
-                //    NothingHappened();
-                //    break;
                 case EventsEnum.GotRobbed:
                    FinanceEvents.GetRobbed(character);
                     break;

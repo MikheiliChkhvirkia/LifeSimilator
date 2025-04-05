@@ -52,8 +52,5 @@ namespace LifeSimilator.Models.JobModels
                 Console.WriteLine(" Invalid job selection.");
             }
         }
-
-
-        // ChangeCareer-ში გამოიტანე ის პროფესიები რომელშიც შეუძლია შეცვლა ( ანუ თუ არის ექიმი არ უნდა შეეძლოს ისევ ექიმის არჩევა )
     }
 }

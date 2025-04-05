@@ -12,10 +12,10 @@ namespace LifeSimilator.Models.CarModels
             // Display options with prices
             foreach (var car in CarStore.Data)
             {
-                Console.WriteLine($"{car.Key}. {car.Value.DisplayName} - ${car.Value.Price}");
+                Console.WriteLine($"{(int)car.Key}. {car.Value.DisplayName} - ${car.Value.Price}");
             }
 
-            Console.WriteLine("Enter the number of the car you want to buy:");
+            Console.WriteLine(" Enter the number of the car you want to buy:");
 
             if (int.TryParse(Console.ReadLine(), out int input) && Enum.IsDefined(typeof(CarsEnum), input) && input != 0) // NoCar can't be bought
             {
@@ -44,7 +44,7 @@ namespace LifeSimilator.Models.CarModels
             int moneyLost = rnd.Next(20, 50);
             character.Health -= damage;
             character.Money -= moneyLost;
-            Console.WriteLine($"Your house caught fire! You lost {damage} health and ${moneyLost}.");
+            Console.WriteLine($" Your house caught fire! You lost {damage} health and ${moneyLost}.");
         }
 
         public void BrokeCar(Character character)
@@ -53,18 +53,18 @@ namespace LifeSimilator.Models.CarModels
             if (character.OwnedCars.Count > 0)
             {
                 int repairCost = rnd.Next(5, 20);
-                int repairCar = rnd.Next(0, character.OwnedCars.Count + 1);
+                int repairCar = rnd.Next(0, character.OwnedCars.Count);
 
                 var selectedCar = character.OwnedCars[repairCar];
                 if (character.Money >= repairCost)
                 {
                     character.Money -= repairCost;
-                    Console.WriteLine($"ur car {selectedCar} broke down, repair cost: ${repairCost}");
+                    Console.WriteLine($" Your car {selectedCar} broke down, repair cost: ${repairCost}");
                 }
                 else
                 {
                     character.Health -= 10;
-                    Console.WriteLine($"couldnt afford repairs. u lost 10 ");
+                    Console.WriteLine($" Couldn't afford repairs. u lost 10 ");
                 }
             }
             else
