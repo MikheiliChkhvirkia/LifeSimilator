@@ -37,11 +37,12 @@ namespace LifeSimilator
             set => nationality = value;
         }
 
-        public CarsEnum CurrentCar { get; private set; } = CarsEnum.NoCar;
 
-        public void SetActiveCar(CarsEnum car)
+        public CarsEnum VisibleCar => CurrentCar;
+
+        public void SelectedCarFromGarage(CarsEnum car)
         {
-            if (cars.Contains(car))
+            if (OwnedCars.Contains(car))
                 CurrentCar = car;
             else
                 Console.WriteLine("You don't own this car.");

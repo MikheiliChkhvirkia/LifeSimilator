@@ -38,14 +38,14 @@ namespace LifeSimilator.Models.CarModels
             }
         }
 
-        //private static void HouseFire(Character character)
-        //{
-        //    int damage = random.Next(15, 30);
-        //    int moneyLost = random.Next(20, 50);
-        //    character.Health -= damage;
-        //    character.Money -= moneyLost;
-        //    Console.WriteLine($"Your house caught fire! You lost {damage} health and ${moneyLost}.");
-        //}
+        public  void HouseFire(Character character)
+        {   var rnd=new Random();   
+            int damage = rnd.Next(15, 30);
+            int moneyLost = rnd.Next(20, 50);
+            character.Health -= damage;
+            character.Money -= moneyLost;
+            Console.WriteLine($"Your house caught fire! You lost {damage} health and ${moneyLost}.");
+        }
 
         public void BrokeCar(Character character)
         {
@@ -53,7 +53,7 @@ namespace LifeSimilator.Models.CarModels
             if (character.OwnedCars.Count > 0)
             {
                 int repairCost = rnd.Next(5, 20);
-                int repairCar = rnd.Next(1, character.OwnedCars.Count + 1);
+                int repairCar = rnd.Next(0, character.OwnedCars.Count + 1);
 
                 var selectedCar = character.OwnedCars[repairCar];
                 if (character.Money >= repairCost)

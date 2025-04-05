@@ -9,11 +9,11 @@ namespace LifeSimilator.Models.CarModels
 
         public List<CarsEnum> OwnedCars => _ownedCars;
 
-        public CarsEnum CurrentCar { get; private set; }
+        public CarsEnum CurrentCar { get; set; }
 
         public void BuyCar(CarsEnum car)
         {
-            if (!_ownedCars.Contains(car))
+            if(!_ownedCars.Contains(car))
             {
                 _ownedCars.Add(car);
                 CurrentCar = car;
