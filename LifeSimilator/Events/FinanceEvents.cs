@@ -92,11 +92,9 @@ namespace LifeSimilator.Events.Generic
 
         public static void Invested(Character character)
         {
-            Console.WriteLine(" Do you want to invest $20? (y/n)");
-            string input = Console.ReadLine();
-            GetYesNoResponse(question);
+            var question = " Do you want to invest $20? (y/n)";
 
-            if (input?.Trim().ToLower() == "y" && character.Money >= 20)
+            if (Response.GetYesNoResponse(question) && character.Money >= 20)
             {
                 character.Money -= 20;
 

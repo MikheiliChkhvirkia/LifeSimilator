@@ -2,10 +2,8 @@
 using LifeSimilator.Events.Generic;
 using LifeSimilator.Models.CarModels;
 using LifeSimilator.Models.JobModels;
-using LifeSimilator.Services; 
 using LifeSimilator.SaveLoad;
-using LifeSimilator.Models.ReusableMethods;
-using System;
+using LifeSimilator.Services;
 
 
 namespace LifeSimilator
@@ -91,7 +89,6 @@ namespace LifeSimilator
                     eventCount = saved.EventCount;
 
                     Console.WriteLine($" Loaded {character.FirstName}'s save. Survived {eventCount} events.");
-                    int highScore = SaveSystem.LoadHighScore();
                     Console.WriteLine(" Last Play:");
                     Console.WriteLine($"   Name       : {character.FirstName} {character.LastName}");
                     Console.WriteLine($"   Job        : {character.Job}");
@@ -99,7 +96,6 @@ namespace LifeSimilator
                     Console.WriteLine($"   Money      : ${character.Money}");
                     Console.WriteLine($"   Events     : {eventCount}");
 
-                    Console.WriteLine($" Highest Score: {highScore} events survived.\n");
                 }
                 else
                 {

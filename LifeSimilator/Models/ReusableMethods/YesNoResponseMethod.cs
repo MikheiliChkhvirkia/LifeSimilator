@@ -6,7 +6,7 @@ namespace LifeSimilator.Models.ReusableMethods
     {
         public static bool GetYesNoResponse(string question)
         {
-            Console.WriteLine($"{question} (y/n)");
+            Console.WriteLine(question);
             string input = Console.ReadLine()?.Trim().ToLower();
             return input == "y";
         }

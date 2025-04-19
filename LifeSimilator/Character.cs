@@ -1,10 +1,11 @@
 ﻿using LifeSimilator.Enums;
 using LifeSimilator.Interfaces;
 using LifeSimilator.Models.CarModels;
+using LifeSimilator.SaveLoad;
 
 namespace LifeSimilator
 {
-    public class Character : CharacterBase, IJob
+    public class Character : CharacterBase, IJob, IGameData
     {
         private string firstName;
         private string lastName;

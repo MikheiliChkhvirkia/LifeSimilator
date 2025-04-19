@@ -1,7 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using LifeSimilator.SaveLoad;
 using System.Text.Json;
-using LifeSimilator.SaveLoad;
 
 namespace LifeSimilator.Services
 {
@@ -9,7 +7,7 @@ namespace LifeSimilator.Services
     {
         private const string FilePath = "savegame.json";
 
-        public static void SaveGame(GameData gameData)
+        public static void SaveGame(IGameData gameData)
         {
             string json = JsonSerializer.Serialize(gameData, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(FilePath, json);
