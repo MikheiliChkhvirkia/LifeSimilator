@@ -10,6 +10,7 @@ namespace LifeSimilator
         private string lastName;
         private int age;
         private NationalityEnum nationality;
+        private int eventCount;
         private readonly List<CarsEnum> cars = [];
         private readonly List<Character> family = [];
         //public allowing on private info for using 
@@ -35,6 +36,12 @@ namespace LifeSimilator
         {
             get => nationality;
             set => nationality = value;
+        }
+
+        public int EventCount
+        {
+            get => eventCount;
+            set => eventCount = value;
         }
 
 

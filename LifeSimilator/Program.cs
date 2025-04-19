@@ -4,6 +4,7 @@ using LifeSimilator.Models.CarModels;
 using LifeSimilator.Models.JobModels;
 using LifeSimilator.Services; 
 using LifeSimilator.SaveLoad;
+using LifeSimilator.Models.ReusableMethods;
 using System;
 
 
@@ -61,9 +62,8 @@ namespace LifeSimilator
                 }
 
                 Console.WriteLine($"\n {character.FirstName} died after {eventCount} events.");
-                SaveSystem.SaveGame(character, eventCount);
-
-
+                character.EventCount = eventCount;
+                SaveSystem.SaveGame(character);
 
                 Console.WriteLine($"\n Do you wish to start over.[y/n]");
 

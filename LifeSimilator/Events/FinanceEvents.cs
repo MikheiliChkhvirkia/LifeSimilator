@@ -1,5 +1,7 @@
 ﻿using System;
 using LifeSimilator.Enums;
+using LifeSimilator.Models.ReusableMethods;
+
 
 namespace LifeSimilator.Events.Generic
 {
@@ -9,10 +11,11 @@ namespace LifeSimilator.Events.Generic
 
         public static void GetRobbed(Character character)
         {
-            Console.WriteLine("\n You're being robbed! What do you do?");
-            Console.WriteLine("1 - Fight\n2 - Talk\n3 - Run");
-            Console.Write("Choose (1/2/3): ");
+            Console.WriteLine("\nYou're being robbed! What do you do?");
 
+            RobberyActionEnum[] options = (RobberyActionEnum[])Enum.GetValues(typeof(RobberyActionEnum));
+            
+            Console.Write("Choose (1/2/3): ");
             string input = Console.ReadLine();
 
             if (int.TryParse(input, out int actionValue) &&
@@ -23,7 +26,7 @@ namespace LifeSimilator.Events.Generic
             }
             else
             {
-                Console.WriteLine(" Invalid input. You stood still. They robbed you for $50.");
+                Console.WriteLine("Invalid input. You stood still. They robbed you for $50.");
                 character.Money -= 50;
             }
         }
@@ -74,7 +77,7 @@ namespace LifeSimilator.Events.Generic
 
         public static void PayRent(Character character)
         {
-            int rent = 10;
+            int rent = 15;
             if (character.Money >= rent)
             {
                 character.Money -= rent;
@@ -82,7 +85,7 @@ namespace LifeSimilator.Events.Generic
             }
             else
             {
-                character.Health -= 5;
+                character.Health -= 10;
                 Console.WriteLine(" Couldn't pay rent. You lost 5 health due to stress.");
             }
         }
@@ -91,6 +94,7 @@ namespace LifeSimilator.Events.Generic
         {
             Console.WriteLine(" Do you want to invest $20? (y/n)");
             string input = Console.ReadLine();
+            GetYesNoResponse(question);
 
             if (input?.Trim().ToLower() == "y" && character.Money >= 20)
             {
@@ -115,21 +119,21 @@ namespace LifeSimilator.Events.Generic
 
         public static void LostWallet(Character character)
         {
-            int lostMoney = random.Next(10, 50);
+            int lostMoney = random.Next(10, 40);
             character.Money -= lostMoney;
             Console.WriteLine($" You lost your wallet with ${lostMoney} inside.");
         }
 
         public static void FoundTreasure(Character character)
         {
-            int treasure = random.Next(50, 200);
+            int treasure = random.Next(20, 60);
             character.Money += treasure;
             Console.WriteLine($" You found a mysterious treasure chest with ${treasure} inside!");
         }
 
         public static void WonLottery(Character character)
         {
-            int prize = random.Next(100, 500);
+            int prize = random.Next(20, 100);
             character.Money += prize;
             Console.WriteLine($" Congratulations! You won the lottery! Prize: ${prize}.");
         }
